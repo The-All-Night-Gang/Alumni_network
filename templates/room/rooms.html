@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Rooms |{% endblock %}
+{% block content %}
+<div class="container ">
+    <div class="container ">
+        <h1 class="">Rooms</h1>
+    </div>
+    <div class="row">
+        
+        <!-- edited this also for other groups - dinesh -->
+        <div class="col-md-9">
+            <div class="row">
+                {% for room in other_rooms %}
+                <div class="col-md-4" style="width: 20rem;">
+                    <div class="col-md-4">
+                        <div class="card-body">
+                            <h2 class="card-title">Room: {{ room.name }}</h2><br>
+                        </div>
+                        <a href="{% url 'room' room.slug %}" class="btn btn-outline-dark btn-sm m-1">&nbsp;{{ room.name }}&nbsp;</a> 
+                    </div>
+                </div>
+                {% endfor %} 
+            </div>
+        </div>
+        <!-- upto this -dinesh -->
+    </div>
+</div>
+
+{% endblock %}

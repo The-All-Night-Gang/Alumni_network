@@ -1,0 +1,103 @@
+{% extends 'base.html' %}
+{% load static %}
+<!-- Page title -->
+{% block title %}Profile{% endblock %}
+<!-- Page title -->
+{% block pagetitle %} 
+    <div class="page-breadcrumb pb-3">
+        <div class="d-flex align-items-center">
+            <h5 class="page-title text-truncate text-dark font-weight-medium mb-0">Your Profile</h5>
+        </div>
+    </div>
+{% endblock %}
+<!-- Page content -->
+{% block content %}
+{% if user.is_authenticated %}
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+<div class="container pb-3">
+<div class="row flex-lg-nowrap">
+  
+  <div class="col">
+    <div class="row pb-5">
+      <div class="col mb-3">
+        <div class="card shadow-lg pb-3 bg-white rounded">
+          <div class="card-body">
+            <div class="e-profile">
+              <div class="row">
+                <div class="col d-flex flex-column flex-sm-row justify-content-between mb-3">
+                  <div class="text-center text-sm-left mb-2 mb-sm-0">
+                    <h3 class="pt-sm-2 pb-1 mb-0 text-nowrap">{{user.get_full_name}}
+                      {% if user.is_superuser %}
+                      <img src="{% static 'verified.png' %}" alt="" height="30" data-toggle="tooltip" title="Super Administrator">
+                      {% else %}
+                      {% endif %}
+                    </h3>
+                    <div class="text-muted"><small>{{user.last_login}}</small></div>
+                  </div>
+                  <div class="text-center text-sm-right">
+                    {% if user.is_superuser %}
+                    <span class="badge badge-primary">administrator</span>
+                    {% elif user.is_staff %}
+                    <span class="badge badge-light">Staff</span>
+                    {% else %}
+                    <span class="badge badge-success">Student</span>
+                    {% endif %}    
+                    
+                    <div class="text-muted"><small>Joined {{user.date_joined}}</small></div>
+                  </div>
+                </div>
+              </div>
+              <ul class="nav nav-tabs">
+                <li class="nav-item"><a href="" class="active nav-link">Profile settings</a></li>
+              </ul>
+              <div class="tab-content pt-3">
+                <div class="tab-pane active">
+                  <form class="form" method="post">
+                    <div class="row">
+                      <div class="col">
+                        <div class="row">
+                          <div class="col">
+                            <div class="form-group">
+                              <label>Full Name</label>
+                              <input class="form-control" type="text" value="{{user.get_full_name}}" readonly>
+                            </div>
+                          </div>
+                          <div class="col">
+                            <div class="form-group">
+                              <label>Username</label>
+                              <input class="form-control" type="text" value="{{user.username}}" readonly>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col">
+                            <div class="form-group">
+                              <label>Email</label>
+                              <input class="form-control" type="text" value="{{user.email}}" readonly>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-12 col-sm-6 mb-3">
+                        <div class="mb-2"><b>Change Password</b></div>
+                        Click <a href="{% url 'password_change' %}">here</a> to change your password.
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+          </div>
+        </div>
+      </div>
+  </div>
+</div>
+</div>
+{% else %}
+<div class="justify-content-center d-flex">
+  <img src="{% static 'unauthrized.png' %}" alt="" style="height: 20rem; width: 20rem;">
+</div>
+<h3 class="text-center">You are not authorized to view this page</h3>
+{% endif %}
+{% endblock %}

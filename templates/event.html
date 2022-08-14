@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Home{% endblock %}
+{% block content %}
+<style>
+  #more {display: none;}
+  </style>
+<div class="container">
+    <!-- <div class="card">
+        <div class="card-body">
+          {{ e.event_name }}
+          {{ e.event_date }}
+          {{ e.event_description }}
+          {{ e.Online_link }}
+          {{ e.event_location }}
+          {{ e.Total_days_of_event }}
+        </div>
+    </div> -->
+
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+      {% for e in event %}
+
+      <div class="col">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">{{ e.event_name }}</h5>
+            <p>Date: {{ e.event_date }}</p>
+            <p><b>Description:</b> {{ e.event_description }}</p>
+          </div>
+          <p class="text-center"><b>Location:</b> {{ e.event_location }} <b>No of days:</b> {{ e.Total_days_of_event }}</p>
+          <p><a class="text-center" href="{{ e.Online_link }}">Online meet</a></p>
+        </div>
+      </div>
+
+      {% endfor %}
+      
+    </div>
+
+    <footer class="bg-transparent  text-center">
+      <div class=" py-4 ">
+        <div class="container text-center">
+          <p class="text-muted mb-0 py-2">Copyright © 2022 NTTF. All rights reserved.</p>
+        </div>
+    </div>
+    </footer>
+
+
+    
+
+
+</div>
+{% endblock %}

@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Home{% endblock %}
+{% block content %}
+
+    <div class="container-fluid mb-3">
+        <div class="nttf" >
+            <img style="width:100%;height:auto;" src="{% static 'img/nttf_final.jpg' %}" alt="IT"/>
+        </div>
+        <hr>
+                <h2 style="color: rgb(0, 0, 0)">Innovation. Inspiration. Institutional.&nbsp;</h2>
+                <h2 style="color: rgb(0, 0, 0); text-align: center;">-- Bringing to life the soul and spirit of NTTF</h2>    
+                <h4 class="text">   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Over 60 years ago, the foundation of the most premier institution in technical education and training was laid in the town of Tellicherry in Kerala. Today,  NTTF has a pan-India presence in 60+ locations and has around 20,000 students  in training at any given point of time.we have many success stories of our candidates  who have transformed their lives after joining NTTF.</h4>
+                    <br>
+                    <br><br>
+
+                    <hr><br>
+                    <br><br>
+            <h4 style="color: rgb(0, 0, 0); text-align: center;">What's happening in NTTF ?</h4>
+            <br>
+            <br>
+            <div class="row mx-lg-2 ">
+                <div class="col py-2 px-3">
+                    <img src="{% static 'img/diploma.png' %}" alt="img" id="training" height="80px" width="80px">
+                    <br>
+                    <br>
+                    <lable for="training" class="icon_text" style="color:#000000">Training</lable>
+                </div>
+                <div class="col py-2 px-3">
+                    <img src="{% static 'img/mandala.png' %}" id="cul" alt="img" height="80px" width="80px">
+                    <br>
+                    <br>
+                    <lable  for="cul" class="icon_text" style="color:#000000">Culturals</lable>
+               </div>
+               <div class="col py-2 px-3">
+                   <img src="{% static 'img/certificate.png' %}" id="cer" alt="img" height="80px" width="80px">
+                    <br>
+                    <br>
+                   <lable for="cer" class="icon_text" style="color:#000000">Certification Courses</lable>
+                </div>
+                <div class="col py-2 px-3">
+                    <img src="{% static 'img/project-management.png' %}" id="pro" alt="img" height="80px" width="80px">
+                    <br>
+                    <br>
+                    <lable for="pro" class="icon_text" style="color:#000000">Projects</lable>
+                </div>
+                <div class="col py-2 px-3">
+                    <img src="{% static 'img/education.png' %}" id="pla" alt="img" height="80px" width="80px">
+                    <br>
+                    <br>
+                    <lable for="pla" class="icon_text" style="color:#000000">Placements</lable>
+                </div>
+            </div>
+            <br>
+
+            <hr>
+
+
+            <br><br>
+            <h2 style="color: rgb(0, 0, 0); text-align: center;">NTTF Alumni Network is used to interact with the alumnis of NTTF.</h2>
+            <br><br>
+            
+            <div class="container-fluid align-self-center">
+                <br>
+                <h3>Any Suggestions or Queries?</h3>
+                <form action="mailto:support@nttf.in?subject=Suggestions to NTTF/FEEDBACK" style="text-align: center;" enctype="text/plain">
+                    <i class="fa fa-envelope-open" aria-hidden="true"></i>&nbsp; 
+                    <input class="btn btn-outline-success" type="submit" value="Mail us">
+
+                    <!-- <div class="form-floating">
+                        <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
+
+                        <label for="floatingTextarea2">Please Mail us</label>
+                      </div>
+                    <br><br>
+                    <input class="btn btn-outline-success" type="submit" value="Please Mail us">
+                    <input class="btn btn-outline-danger" type="reset" value="reset"><br> -->
+                </form>
+            </div>
+                
+    </div>
+
+    <footer class="bg-light  text-center">
+        <div class="container py-5">
+              <p>You can also find uss on</p>
+              <ul class="list-inline mt-4">
+                <li class="list-inline-item"><a href="https://www.nttftrg.com/" target="_blank" title="nttftrg"><i class="fa fa-home"></i>&nbsp;NTTF</a></li>
+                &nbsp;&nbsp;
+                <li class="list-inline-item"><a href="#" target="_blank" title="twitter"><i class="fa fa-twitter"></i>&nbsp;Twitter</a></li>&nbsp;&nbsp;
+                <li class="list-inline-item"><a href="#" target="_blank" title="facebook"><i class="fa fa-facebook"></i>&nbsp;Facebook</a></li>&nbsp;&nbsp;
+                <li class="list-inline-item"><a href="#" target="_blank" title="instagram"><i class="fa-brands fa-instagram"></i>&nbsp;Instagram</a></li>
+              </ul>
+        </div>
+        <div class=" py-4 ">
+            <div class="container text-center">
+              <p class="text-muted mb-0 py-2">Copyright © 2022 NTTF. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    
+
+{% endblock %}

@@ -1,0 +1,125 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Home{% endblock %}
+{% block content %}
+
+    <style>
+        /* .image-thumbail {
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .list-group-item a {
+            text-decoration: none;
+            color: black;
+        }
+
+.banner {
+  width: 300px;
+  height: 600px;
+  margin: 0 auto;
+  position: absolute;
+  left: 1200px;
+  top: 40px;
+  background-image: url("http://i.imgur.com/0ggd0lT.jpg");
+  -webkit-box-shadow: 10px 10px 20px 0px rgba(0,0,0,0.25);
+-moz-box-shadow: 10px 10px 20px 0px rgba(0,0,0,0.25);
+box-shadow: 10px 10px 20px 0px rgba(0,0,0,0.25);
+}
+
+.inner-banner {
+  position: relative;
+  top: 30%; left: 50%;
+  transform: translate(-50%,-50%);
+  width: 200px;
+  height: 200px;
+}
+
+.banner p {
+  font-family: 'Quicksand', sans-serif;
+  font-size: 32px;
+  font-weight: 700;
+  color: #25283D;
+} */
+
+/* button {
+  width: 200px;
+  height: 200px;
+  background-color: #07BEB8;
+  color: white;
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: 5px;
+  border: none;
+  
+}
+
+button:hover {
+  background-color: #98DFEA;
+  color: #07BEB8;
+  -webkit-box-shadow: 10px 10px 20px 0px rgba(0,0,0,0.25);
+-moz-box-shadow: 10px 10px 20px 0px rgba(0,0,0,0.25);
+box-shadow: 10px 10px 20px 0px rgba(0,0,0,0.25);
+} */
+    </style>
+
+<div class="container">
+
+    <div class="row">
+        <div class="col-md-3">
+            <br>
+            {% if request.user.is_authenticated %}
+            {% endif %}
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#cat_drop" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"><Menu>≣</Menu></span>
+            </button>
+            <div class="card" id="cat_drop">
+                <div class="card-header">
+                    <i><b>Categories</b></i>
+                </div>
+                <ul class="list-group list-group-flush" >
+                    <li class="list-group-item" >
+                        <a href="{% url 'gallery' %}"><center>All</center></a>
+                    </li>
+                    {% for category in categories %}
+                    <li class=" list-group-item">
+                        <a href="{% url 'gallery' %}?category={{category.name}}">
+                            <center>{{category.name}}</center>
+                        </a>
+                    </li>
+                    {% endfor %}
+                    
+                        {% if request.user.is_superuser %}
+                        <a href="{% url 'add' %}" class="btn btn-dark btn-block btn-sm m-1" style="text-align: center;">Add Photo</a>
+                        {% else %}
+                        {% endif %}
+                    </ul>
+                </div>
+                
+            </div>
+            <div class="col-md-9">
+                <div class="row">
+                    
+                    {% for photo in photos %}
+                    <div class="col-md-4">
+                        <div class="card my-2">
+                            <img class="image-thumbail" src="{{photo.image.url}}" alt="image not found">        
+
+                            <div class="card-body">
+                                <small>Category: {{photo.category.name}}</small>
+                            </div>
+                            <a href="{% url 'photo' photo.id %}" class="btn btn-outline-dark btn-sm m-1">View</a>
+                        </div>
+                    </div>
+                    {% empty %}
+                    <h3>No photos...</h3>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <link href="https://fonts.googleapis.com/css?family=Quicksand:400,700" rel="stylesheet">
+
+
+{% endblock %}

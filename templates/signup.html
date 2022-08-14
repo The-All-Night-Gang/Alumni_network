@@ -1,0 +1,140 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Sign Up |{% endblock %}
+{% load crispy_forms_tags %}
+{% block content %}
+<body>
+    <style>
+        .body{
+            background-image: linear-gradient(-0deg, #ffffff 0%, #ffffff 100%);
+        }
+    </style>
+	<img class="wave1" src="{% static 'img/wave.png' %}">
+	<div class="container1">
+		<div class="img1">
+		</div>
+		<div class="login-content">
+			<form action="." method="post">
+                {% csrf_token %}
+				<img src="{% static 'img/nttflogo.png' %}">
+				<h2 class="title">SignUp</h2>
+           		<div class="input-div one">
+           		   <div class="i">
+           		   		<i class="fas fa-user"></i>
+           		   </div>
+           		   <div class="div">
+           		   		<input type="text" name="username" class="input" required placeholder="Username/email">
+           		   </div>
+           		</div>
+                <div class="input-div one">
+                    <div class="i">
+                            <i class="fas fa-user"></i>
+                    </div>
+                    <div class="div">
+                        <input type="text" name="first_name" class="input" required placeholder="enter your first name">
+                    </div>
+                </div>
+                <div class="input-div one">
+                    <div class="i">
+                            <i class="fas fa-user"></i>
+                    </div>
+                    <div class="div">
+                        <input type="text" name="last_name" class="input" required placeholder="enter your last name">
+                    </div>
+                </div>
+           		<div class="input-div one">
+           		   <div class="i"> 
+           		    	<i class="fas fa-lock"></i>
+           		   </div>
+           		   <div class="div">
+           		    	<input type="password" name="password1" class="input" required placeholder="Passward">
+            	   </div>
+            	</div>
+                <div class="input-div pass">
+                    <div class="i"> 
+                        <i class="fas fa-lock"></i>
+                    </div>
+                    <div class="div">
+                         <input type="password" name="password2" class="input" required placeholder="Repeate Passward">
+                    </div>
+                </div>
+                <div class="input-div one">
+                    <div class="i"> 
+                         <i class="fas fa-lock"></i>
+                    </div>
+                    <div class="div">
+                         <input type="date" name="year_of_passing" class="input" required placeholder="year of passing">
+                    </div>
+                </div>
+                <div class="input-div one">
+                    <div class="i"> 
+                         <i class="fas fa-lock"></i>
+                    </div>
+                    <div class="div">
+                         <input type="text" name="course_studied" class="input" required placeholder="course_studied">
+                    </div>
+                </div>
+                <div class="input-div one">
+                    <div class="i"> 
+                         <i class="fas fa-lock"></i>
+                    </div>
+                    <div class="div">
+                         <input type="text" name="additional_qualifications" class="input"  placeholder="additional_qualifications">
+                    </div>
+                </div>
+                <div class="input-div one">
+                    <div class="i"> 
+                         <i class="fas fa-lock"></i>
+                    </div>
+                    <div class="div">
+                         <input type="text" name="present_position_held" class="input"  placeholder="present_position_held">
+                    </div>
+                </div>
+                <div class="input-div one">
+                    <div class="i"> 
+                         <i class="fas fa-lock"></i>
+                    </div>
+                    <div class="div">
+                         <input type="text" name="special_contribution" class="input"  placeholder="special_contribution">
+                    </div>
+                </div>
+                <div class="input-div one">
+                    <div class="i"> 
+                         <i class="fas fa-lock"></i>
+                    </div>
+                    <div class="div">
+                         <input type="file" name="profile_pic" class="input"  placeholder="">
+                    </div>
+                </div>
+                
+                <br>
+                <div class="">
+                
+                <label class="text-white">Select your batch</label>
+            
+                    {{ form.i_am|as_crispy_field }}
+            
+            
+                </div>
+            
+                {% if form.errors %}
+                    {% for fields in form %}
+                        {% for erros in field.errors %}
+                            <div class="mb-5 p-4 rounded-xl bg-red-300 text-white">
+                                <p>{{ error|escape }}  </p>
+            
+                            </div>
+                        {% endfor %}
+                    {% endfor %}
+                {% endif %}
+
+                <button class="btn1">Submit</button>
+            	<a href="{% url 'login' %}" class="text-black">Have a account?</a>
+
+            </form>
+        </div>
+    </div>
+    <script type="text/javascript" src="main.js"></script>
+</body>
+
+{% endblock %}

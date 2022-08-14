@@ -1,0 +1,105 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}{{ room.name }} |{% endblock %}
+{% block content %}
+<div class="text-center p-10 lg:p-20">
+    <h1 class=" text-3xl text-dark lg:text-6xl">{{ room.name }}</h1>
+ </div>
+<div class="container bg-light">
+    <div class="chat-messages space-y-3" id="chat-messages">
+        {% for message in messages %}
+            <div class="p-4 bg-gray-200 rounded-xl">
+                <p class="font-semibold">{{ message.user.username }}</p>
+                <p>{{ message.content }}</p>
+                <hr class="dropdown-divider">
+            </div>
+        {% endfor %}
+
+    </div> 
+</div>
+<br>
+<div class="container space-y-3 bg-transparent text-center">
+    
+    <form action="." method="post" class="flex">
+
+        <div class="row">
+            <div class="col">
+                <textarea name="content" id="chat-message-input" cols="40" rows="5" placeholder="   your message..."></textarea>
+              <!-- <input type="text" name="content" class="form-control" placeholder="your message..."
+              id="chat-message-input" aria-label="your message..."> -->
+            </div><br><br><br><br><br><br>
+            <div class="">
+                <button class="btn btn-primary" id="chat-message-submit" type="button">Send</button>
+            </div>
+        </div>
+
+    </form>
+</div>
+{% endblock %}
+   
+
+{% block scripts %}
+
+{{ room.slug|json_script:"json-roomname"  }}
+{{ request.user.username|json_script:"json-username"  }}
+<script>
+    const roomName = JSON.parse(document.getElementById('json-roomname').textContent);
+    const userName = JSON.parse(document.getElementById('json-username').textContent);
+
+    const chatSocket = new WebSocket(
+        'ws://'
+        +window.location.host
+        +'/ws/'
+        +roomName
+        +'/'
+    );
+
+    chatSocket.onmessage = function(e){
+        console.log('onmessage')
+
+        const data = JSON.parse(e.data);
+
+        if(data.message) {
+            let html =  '<div class="p-4 bg-gray-200 rounded-xl">';
+                html += '<p class="font-semibold">'+data.username+'</p>';
+                html += '<p>' + data.message + '</p></div>';
+
+            document.querySelector('#chat-messages').innerHTML += html;
+            //add this function call also
+            scrollToBottom();
+            //end
+        }   else {
+            alert("The message was empty!");
+        }
+    }
+
+    chatSocket.onclose = function(e){
+        console.log('onclose')
+    }
+    document.querySelector('#chat-message-submit').onclick = function(e) {
+
+        e.preventDefault();
+        const messageInputDom = document.querySelector('#chat-message-input'); 
+        const message = messageInputDom.value;
+
+        chatSocket.send(JSON.stringify({
+            'message': message,
+            'username': userName,
+            'room': roomName
+        }));
+
+        messageInputDom.value = '';
+
+        return false;
+    }
+
+    // function need to add for scrolling
+    function scrollToBottom(){
+        const objDiv = document.querySelector('#chat-messages');
+        objDiv.scrollTop = objDiv.scrollHeight;
+    }
+    scrollToBottom();
+
+    // end of the scroll function
+</script>
+{% endblock %}
